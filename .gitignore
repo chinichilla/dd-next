@@ -1,1 +1,16 @@
-node_modules
+logs
+*.log
+npm-debug.log*
+
+pids
+*.pid
+*.seed
+
+build/Release
+**/node_modules
+**/package-lock.json
+
+.DS_Store
+.next/
+
+
