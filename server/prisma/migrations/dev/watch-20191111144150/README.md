@@ -41,7 +41,7 @@ migration ..watch-20191111144150
 +}
 +
 +datasource db {
-+  provider = "sqlite"
++  provider = "mysql"
 +  url      = "file:dev.db"
 +}
 +

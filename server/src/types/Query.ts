@@ -1,4 +1,10 @@
-import { idArg, queryType, stringArg } from 'nexus'
+import {
+  idArg,
+  makeSchema,
+  objectType,
+  stringArg,
+  booleanArg
+} from 'nexus'
 import { getUserId } from '../utils'
 
 export const Query = queryType({
@@ -14,7 +20,13 @@ export const Query = queryType({
         })
       },
     })
-
+    // added in boilerplate part 1
+    t.list.field('users', {
+      type: 'User',
+      resolve: (parent, args, ctx) => {
+        return ctx.photon.users.findMany({});
+      }
+    });
     t.list.field('feed', {
       type: 'Post',
       resolve: (parent, args, ctx) => {
@@ -28,8 +40,11 @@ export const Query = queryType({
       type: 'Post',
       args: {
         searchString: stringArg({ nullable: true }),
+        // added in boilerplate part 1
+        published: booleanArg(),
+
       },
-      resolve: (parent, { searchString }, ctx) => {
+      resolve: (parent, { searchString, published }, ctx) => {
         return ctx.photon.posts.findMany({
           where: {
             OR: [
@@ -41,6 +56,17 @@ export const Query = queryType({
               {
                 content: {
                   contains: searchString,
+                },
+                
+              },
+              {
+                title: {
+                  contains: published,
+                },
+              },
+              {
+                content: {
+                  contains: published,
                 },
               },
             ],

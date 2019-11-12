@@ -20,34 +20,34 @@ services:
     ports:
       - '5555:5555'
     build:
-      context: backend/prisma
+      context: server/prisma
       dockerfile: Dockerfile
     volumes:
       - /app/prisma
-  backend:
+  server:
     links:
       - mysql
     depends_on:
       - mysql
-    container_name: backend
+    container_name: server
     ports:
       - '4000:4000'
     build:
-      context: backend
+      context: server
       dockerfile: Dockerfile
     volumes:
-      - ./backend:/app
+      - ./server:/app
       - /app/node_modules
       - /app/prisma
-  frontend:
-    container_name: frontend
+  client:
+    container_name: client
     ports:
       - '3000:3000'
     build:
-      context: frontend
+      context: client
       dockerfile: Dockerfile
     volumes:
-      - ./frontend:/app
+      - ./client:/app
       - /app/node_modules
       - /app/.next
 
