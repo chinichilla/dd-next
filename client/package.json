@@ -15,7 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
-    "next": "^8.1.1-canary.61",
+    "next": "^9.3.3",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
   },
